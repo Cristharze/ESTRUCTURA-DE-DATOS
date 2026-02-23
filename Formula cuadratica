@@ -65,3 +65,8 @@ void imaginario(int a ,int b ,double d,double &real,double &imag){
     real = -b/(2.0*a);
     imag = sqrt(-d)/(2.0*a);
 }
+
+void imaginario(int a ,int b ,double d,double &real,double &imag){
+    real = -b/(2.0*a);
+    imag = sqrt(-d)/(2.0*a);
+}
