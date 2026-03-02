@@ -1,0 +1,78 @@
+#include <iostream>
+using namespace std;
+
+int factorial(int n);
+void menu();
+int sumaImpar(int N);
+double serie(double x, int n);
+
+int main()
+{
+	int op;
+	do {
+		menu();
+		cout << "Opcion: "; cin >> op;
+		switch (op) {
+		case 1:
+			int num;
+			cout << "Ingrese el numero a calcular: ";
+			cin >> num;
+			cout << endl << "El factorial de " << num << " es: " << factorial(num);
+			break;
+		case 2:
+			int N;
+			cout << "Ingrese el valor N: ";
+			cin >> N;
+			cout << "La suma de los numeros impares entre 1 y " << N << " es: " << sumaImpar(N) << endl;
+			break;
+		case 3:
+			double x;
+			int n;
+			cout << "Ingrese el valor de X: ";
+			cin >> x;
+			cout << "Ingrese el valor de n: ";
+			cin >> n;
+			cout << "La suma de la serie es: " << serie(x, n);
+			break;
+		default:
+			cout << "Valor no permitido.";
+			break;
+		}
+	} while (op != 0);
+	return 0;
+}
+
+int factorial(int n) {
+	if ((n == 0) || (n == 1)) {
+		return 1;
+	}
+	else {
+		return factorial(n - 1) * n;
+	}
+}
+
+void menu() {
+	cout << endl << "MENU" << endl;
+	cout << "1. Factorial. " << endl;
+	cout << "2. Ejercicio suma impar. " << endl;
+	cout << "3. Ejercicio expresion Horner. " << endl;
+	cout << "0. Salir " << endl;
+}
+
+int sumaImpar(int N) {
+	if (N <= 0) {
+		return 0;
+	}
+	else if (N % 2 != 0) {
+		return N + sumaImpar(N - 1);
+	}
+}
+
+double serie(double x, int n) {
+	if (n == 0) {
+		return 0;
+	}
+	else {
+		return x * (1 + serie(x, n - 1));
+	}
+}
