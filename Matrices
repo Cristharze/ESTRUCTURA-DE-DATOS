@@ -8,21 +8,47 @@ using namespace std;
 
 void cargar(int matriz[MAXROW][MAXCOL], int n, int m);
 void mostrar(int matriz[MAXROW][MAXCOL], int n, int m);
+void menu();
+bool matrizMagica(int matriz[MAXROW][MAXCOL], int n, int m);
 
 int main()
 {
-    int tamrow, tamcol, matriz[MAXROW][MAXCOL];
+    int tamrow, tamcol, matriz[MAXROW][MAXCOL], op;
     do {
-        cout << "Ingrese el numero de filas: ";
-        cin >> tamrow;
-    } while (tamrow <= 0 || tamrow > MAXROW);
-    do {
-        cout << "Ingrese el numero de columnas: ";
-        cin >> tamcol;
-    } while (tamcol <= 0 || tamcol > MAXCOL);
-    cargar(matriz, tamrow, tamcol);
-    cout << "MATRIZ: " << endl;
-    mostrar(matriz, tamrow, tamcol);
+        menu();
+        cout << "Opcion: ";
+        cin >> op;
+        switch (op) {
+        case 1:
+            do {
+                cout << "Ingrese el numero de filas: ";
+                cin >> tamrow;
+            } while (tamrow <= 0 || tamrow > MAXROW);
+            do {
+                cout << "Ingrese el numero de columnas: ";
+                cin >> tamcol;
+            } while (tamcol <= 0 || tamcol > MAXCOL);
+            cargar(matriz, tamrow, tamcol);
+            break;
+        case 2:
+            cout << "MATRIZ: " << endl;
+            mostrar(matriz, tamrow, tamcol);
+            break;
+        case 3: {
+            bool resultado = matrizMagica(matriz, tamrow, tamcol);
+            if (resultado) {
+                cout << "La matriz es magica" << endl;
+            }
+            else {
+                cout << "La matriz no es magica" << endl;
+            }
+            break;
+        }
+        default:
+            cout << "Opcion no disponible." << endl;
+            break;
+        }
+    } while (op != 4);
     return 0;
 }
 
@@ -45,4 +71,51 @@ void mostrar(int matriz[MAXROW][MAXCOL], int n, int m) {
         cout << "|" << endl;
     }
         
+}
+void menu() {
+    cout << "1. Cargar matriz cuadrada" << endl;
+    cout << "2. Mostrar" << endl;
+    cout << "3. Es una matriz magica?" << endl;
+    cout << "4. Salir" << endl;
+}
+
+bool matrizMagica(int matriz[MAXROW][MAXCOL], int n, int m) {
+    if (n != m) {
+        cout << "La matriz no es cuadrada.";
+        return false;
+    }
+    int sumaRef = 0;
+    // Suma de la primera fila
+    for (int j = 0; j < m; j++) {
+        sumaRef += matriz[0][j];
+    }
+    // Verificar filas
+    for (int i = 0; i < n; i++) {
+        int sumaFila = 0;
+        for (int j = 0; j < m; j++) {
+            sumaFila += matriz[i][j];
+        }
+        if (sumaFila != sumaRef) return false;
+    }
+    // Verificar columnas
+    for (int j = 0; j < m; j++) {
+        int sumaCol = 0;
+        for (int i = 0; i < n; i++) {
+            sumaCol += matriz[i][j];
+        }
+        if (sumaCol != sumaRef) return false;
+    }
+    // Diagonal principal
+    int sumaDiag1 = 0;
+    for (int i = 0; i < n; i++) {
+        sumaDiag1 += matriz[i][i];
+    }
+    if (sumaDiag1 != sumaRef) return false;
+    // Diagonal secundaria
+    int sumaDiag2 = 0;
+    for (int i = 0; i < n; i++) {
+        sumaDiag2 += matriz[i][n - 1 - i];
+    }
+    if (sumaDiag2 != sumaRef) return false;
+    return true;
 }
