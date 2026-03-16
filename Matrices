@@ -37,7 +37,12 @@ void cargar(int matriz[MAXROW][MAXCOL], int n, int m) {
 }
 void mostrar(int matriz[MAXROW][MAXCOL], int n, int m) {
     int i, k;
-    for (i = 0; i < n; i++)
-        for (k = 0; k < m; k++)
-            cout << "Matriz[" << i << "][" << k << "]: " << matriz[i][k] << endl;
+    for (i = 0; i < n; i++) {
+        cout << "| ";
+        for (k = 0; k < m; k++) {
+            cout <<matriz[i][k] <<" ";
+        }
+        cout << "|" << endl;
+    }
+        
 }
