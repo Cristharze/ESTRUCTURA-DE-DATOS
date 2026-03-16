@@ -1,0 +1,43 @@
+// matrices.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+
+#include <iostream>
+#define MAXCOL 20
+#define MAXROW 20
+using namespace std;
+
+void cargar(int matriz[MAXROW][MAXCOL], int n, int m);
+void mostrar(int matriz[MAXROW][MAXCOL], int n, int m);
+
+int main()
+{
+    int tamrow, tamcol, matriz[MAXROW][MAXCOL];
+    do {
+        cout << "Ingrese el numero de filas: ";
+        cin >> tamrow;
+    } while (tamrow <= 0 || tamrow > MAXROW);
+    do {
+        cout << "Ingrese el numero de columnas: ";
+        cin >> tamcol;
+    } while (tamcol <= 0 || tamcol > MAXCOL);
+    cargar(matriz, tamrow, tamcol);
+    cout << "MATRIZ: " << endl;
+    mostrar(matriz, tamrow, tamcol);
+    return 0;
+}
+
+void cargar(int matriz[MAXROW][MAXCOL], int n, int m) {
+    int i, k;
+    for (i = 0; i < n; i++) {
+        for (k = 0; k < m; k++) {
+            cout << "Matriz[" << i << "][" << k << "]: ";
+            cin >> matriz[i][k];
+        }
+    }
+}
+void mostrar(int matriz[MAXROW][MAXCOL], int n, int m) {
+    int i, k;
+    for (i = 0; i < n; i++)
+        for (k = 0; k < m; k++)
+            cout << "Matriz[" << i << "][" << k << "]: " << matriz[i][k] << endl;
+}
